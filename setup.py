@@ -1,15 +1,11 @@
 from pathlib import Path
 import json
 
-# Find the main project folder
 BASE_DIR = Path(__file__).resolve().parent
-
-# Create a path to the data folder
 DATA_DIR = BASE_DIR / "data"
 
-
 def initialize_app():
-    # Create the data folder if it doesn't exist
+    """creates the data dictionary and any missing JSON files"""
     DATA_DIR.mkdir(parents=True, exist_ok=True)
 
     # Define the files our app needs
