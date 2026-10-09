@@ -8,14 +8,12 @@ def initialize_app():
     """creates the data dictionary and any missing JSON files"""
     DATA_DIR.mkdir(parents=True, exist_ok=True)
 
-    # Define the files our app needs
     files = {
         "tasks.json": [],
         "schedule.json": [],
         "notes.json": []
     }
 
-    # Create any files that are missing
     for filename, default_data in files.items():
         file_path = DATA_DIR / filename
 
