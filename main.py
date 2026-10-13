@@ -1,9 +1,9 @@
 import argparse
 
 from setup import initialize_app
-
-from task_manager import run_task_manager
-from schedule_manager import run_schedule_manager
+from task_manager import run_task_manager, TaskManager
+from schedule_manager import run_schedule_manager, ScheduleManager
+from notes_manager import run_notes_manager  
 
 
 def show_menu():
@@ -11,7 +11,7 @@ def show_menu():
     print("1. Manage assignments")
     print("2. Manage study schedule")
     print("3. Manage notes")
-    print("4. Run automation")
+    print("4. Run automation / report")
     print("5. Exit")
 
 
@@ -27,10 +27,17 @@ def run_menu():
             run_schedule_manager()
 
         elif choice == "3":
-            print("Notes manager is not connected yet.")
+            run_notes_manager()  
 
         elif choice == "4":
-            print("Automation is not connected yet.")
+            print("\nGenerating Study Organizer Report...")
+            try:
+                task_mgr = TaskManager()
+                sched_mgr = ScheduleManager()
+                print("\n" + task_mgr.generate_task_summary())
+                print("\n" + sched_mgr.generate_schedule_summary())
+            except Exception as e:
+                print(f"Could not generate full report: {e}")
 
         elif choice == "5":
             print("Goodbye!")
@@ -62,6 +69,14 @@ def main():
         run_task_manager()
     elif args.command == "schedule":
         run_schedule_manager()
+    elif args.command == "notes":
+        run_notes_manager()  
+    elif args.command == "report":
+        print("Generating Automation Report...")
+        task_mgr = TaskManager()
+        sched_mgr = ScheduleManager()
+        print("\n" + task_mgr.generate_task_summary())
+        print("\n" + sched_mgr.generate_schedule_summary())
     else:
         print(f"Command selected: {args.command}")
         print("This feature will be connected later.")
