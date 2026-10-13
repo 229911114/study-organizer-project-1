@@ -2,6 +2,9 @@ import argparse
 
 from setup import initialize_app
 
+from task_manager import run_task_manager
+from schedule_manager import run_schedule_manager
+
 
 def show_menu():
     print("\n===== STUDY ORGANIZER =====")
@@ -18,10 +21,10 @@ def run_menu():
         choice = input("Choose an option: ").strip()
 
         if choice == "1":
-            print("Task manager is not connected yet.")
+            run_task_manager()
 
         elif choice == "2":
-            print("Schedule manager is not connected yet.")
+            run_schedule_manager()
 
         elif choice == "3":
             print("Notes manager is not connected yet.")
@@ -55,6 +58,10 @@ def main():
 
     if args.command is None:
         run_menu()
+    elif args.command == "tasks":
+        run_task_manager()
+    elif args.command == "schedule":
+        run_schedule_manager()
     else:
         print(f"Command selected: {args.command}")
         print("This feature will be connected later.")
